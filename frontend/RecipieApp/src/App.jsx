@@ -1,8 +1,11 @@
 import './App.css'
+import Header from './Components/Sidebar/Sidebar'
 
 function App() {
   return (
-    <h1>Recipe App</h1>
+    <>
+    <Header/>
+    </>
   )
 }
 
