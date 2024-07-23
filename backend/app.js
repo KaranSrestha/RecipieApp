@@ -9,8 +9,10 @@ app.use(express.json());
 
 app.use(express.urlencoded({extended: true}));
 
-app.use("/api/signup", require("./Routes/signup"));
-app.use("/api/login", require("./Routes/login"));
+app.use("/api", require("./Routes/signup"));
+app.use("/api", require("./Routes/login"));
+app.use("/api", require("./Routes/createPost"));
+app.use("/api", require("./Routes/createPost"));
 
 app.listen(PORT, ()=>{
     console.log("Server running at "+PORT);
