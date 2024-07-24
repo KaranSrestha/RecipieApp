@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const secretKey = process.env.JWT_SECRET || 'my_jwt_secret'; 
-router.get("/api/login", async (req, res) => {
+router.get("/login", async (req, res) => {
     const { username, password } = req.query;
     
     const query = `

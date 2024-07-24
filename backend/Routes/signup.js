@@ -14,7 +14,7 @@ const hashPassword = async (plainPassword) => {
 };
 
 
-router.post("/api/signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
     const {name, username, password, email} = req.body;
     const query = `
         INSERT INTO users(name, username, password, email)
