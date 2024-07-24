@@ -1,7 +1,9 @@
 import React from 'react'
 import "./login.css";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate = useNavigate();
     return (
         <div className='container'>
             <div id="card">
@@ -23,7 +25,9 @@ function Login() {
                         <a href="#">
                             <legend id="forgot-pass">Forgot password?</legend>
                         </a>
-                        <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
+                        <input 
+                        onClick={()=>navigate("/home")}
+                        id="submit-btn" type="submit" name="submit" value="LOGIN" />
                         <a href="#" id="signup">Don't have account yet?</a>
                     </form>
                 </div>
