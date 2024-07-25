@@ -4,10 +4,12 @@ import Post from '../Post'
 
 const Home = () => {
   return (
-    <>
+    <div className='bg-black'>
         <Sidebar/>
         <Post/>
-    </>
+        <Post/>
+        <Post/>
+    </div>
   )
 }
 

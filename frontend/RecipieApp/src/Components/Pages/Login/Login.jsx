@@ -13,12 +13,12 @@ function Login() {
                         <div className="underline-title"></div>
                     </div>
                     <form method="post" className="form">
-                        <label for="user-email">
+                        <label htmlFor="user-email">
                             &nbsp;Email
                         </label>
-                        <input id="user-email" className="form-content" type="email" name="email" autocomplete="on" required />
+                        <input id="user-email" className="form-content" type="email" name="email" autoComplete="on" required />
                         <div className="form-border"></div>
-                        <label for="user-password">&nbsp;Password
+                        <label htmlFor="user-password">&nbsp;Password
                         </label>
                         <input id="user-password" className="form-content" type="password" name="password" required />
                         <div className="form-border"></div>
