@@ -1,11 +1,12 @@
 import React from 'react'
 import "./login.css";
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 function Login() {
     const navigate = useNavigate();
     return (
-        <div className='container'>
+        <StyledContainer>
             <div id="card">
                 <div id="card-content">
                     <div id="card-title">
@@ -32,8 +33,12 @@ function Login() {
                     </form>
                 </div>
             </div>
-        </div>
+        </StyledContainer>
     )
 }
+
+const StyledContainer = styled.div`
+
+`
 
 export default Login
