@@ -11,8 +11,8 @@ const Post = () => {
   };
 
   return (
-    <div className="w-full min-h-[100vh] flex justify-center items-center">
-      <div className="flex bg-transparent w-[500px] flex-col rounded border-[#5b5b5b] border text-[#a0a0a0]">
+    <div className="w-full max-h-[85vh] h-[100%] flex justify-center items-center">
+      <div className="flex bg-transparent w-[500px] flex-col rounded border-[#5b5b5b] border text-[#a0a0a0] mt-4 mb-4">
         <div className="flex p-[10px] items-center gap-[10px] border-[#5b5b5b] border-b">
           <img src={profilePic} alt="profile-pic" className="h-[40px] w-[40px] rounded-full" />
           <div>

@@ -1,50 +1,60 @@
-.sidebar{
+.sidebar {
     position: fixed;
     left: 0;
     bottom: 0;
     top: 0;
     width: 25dvw;
-    background-color: rgb(236, 49, 49);
+    background-color: transparent;
     z-index: 200;
-    padding-top: 5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    padding-top: 5px;
     padding: 10px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    color: white;
+    border-right: 1px solid white;
 }
-.logo{
+
+.logo {
     font-size: 26px;
     font-weight: bold;
     padding: 25px;
 }
-.sidebar-link{
-    height: 40px;
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.sidebar-link {
+    height: 50px;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 10px;
     gap: 20px;
-    padding: 4px;
-    border: 2px solid blue;
-    border-radius: 5px;
+    border-radius: 4px;
     padding-left: 10px;
 }
-.sidebar-link:first-child{
-    margin-top: 50px;
-}
-.sidebar-link:last-child{
+
+.sidebar-link:last-child {
     margin-top: auto;
 }
-i{
-    font-size: 24px;
-}
-.sidebar-link:hover{
-    background-color: rgb( 235, 235,235);
+
+.sidebar-link:hover {
+    background-color: rgba(167, 167, 167, 0.432);
     cursor: pointer;
 }
-.sidebar-link div{
+
+i {
+    font-size: 24px;
+}
+
+.sidebar-link div {
     font-size: 22px;
     font-weight: bold;
 }
 
+.more-link {
+    margin-top: auto;
+}
