@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import profilePic from './Pages/Login/background.jpg';
+import profilePic from '../Pages/Login/background.jpg';
 
 const Post = () => {
   const [like, setLike] = useState(false);

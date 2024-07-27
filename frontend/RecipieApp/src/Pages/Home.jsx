@@ -1,6 +1,6 @@
 import React from 'react'
-import Sidebar from '../Sidebar/Sidebar'
-import Post from '../Post'
+import Sidebar from '../Components/Sidebar/Sidebar'
+import Post from '../Components/Post'
 
 const Home = () => {
   return (
