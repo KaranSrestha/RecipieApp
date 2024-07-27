@@ -13,22 +13,29 @@ function Login() {
                         <div className="underline-title"></div>
                     </div>
                     <form method="post" className="form">
-                        <label htmlFor="user-email">
-                            &nbsp;Email
-                        </label>
-                        <input id="user-email" className="form-content" type="email" name="email" autoComplete="on" required />
+                        <div className='inputField'>
+                            <input id="user-email" className="form-content" type="text" name="email" autoFocus="off" required />
+                            <label htmlFor="user-email">
+                                &nbsp;Email or Username
+                            </label>
+                        </div>
                         <div className="form-border"></div>
-                        <label htmlFor="user-password">&nbsp;Password
-                        </label>
-                        <input id="user-password" className="form-content" type="password" name="password" required />
+                        <div className='inputField'>
+                            <input id="user-password" className="form-content" type="password" name="password" required />
+                            <label htmlFor="user-password">&nbsp;Password
+                            </label>
+                        </div>
                         <div className="form-border"></div>
                         <a href="#">
                             <legend id="forgot-pass">Forgot password?</legend>
                         </a>
-                        <input 
-                        onClick={()=>navigate("/home")}
-                        id="submit-btn" type="submit" name="submit" value="LOGIN" />
-                        <a href="#" id="signup">Don't have account yet?</a>
+                        <input
+                            onClick={() => navigate("/home")}
+                            id="submit-btn" type="submit" name="submit" value="LOGIN" />
+                        <a
+                            className='hover:cursor-pointer hover:text-red-500 text-white'
+                            onClick={() => navigate("/signup")}
+                            id="signup">Don't have account yet?</a>
                     </form>
                 </div>
             </div>

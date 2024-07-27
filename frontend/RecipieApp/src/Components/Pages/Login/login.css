@@ -49,9 +49,7 @@ a{
   }
   label {
     font-family:sans-serif;
-    font-size: 12px;
-    padding-top: 18px;
-    padding-bottom: 6px;
+    font-size: 16px;
   }
   #submit-btn {
     background: -webkit-linear-gradient(right, #7bb1f7, #3d2ec0);
@@ -78,16 +76,16 @@ a{
     text-align: right;
   }
   #signup {
-    color: blue;
     font-family:sans-serif;
     font-size: 10pt;
     margin-top: 16px;
     text-align: center;
   }
   .form {
-    align-items: left;
+    /* align-items: left; */
     display: flex;
     flex-direction: column;
+    gap: 15px;
   }
   .form-border {
     background: -webkit-linear-gradient(right, #7bb1f7, #3d2ec0);
@@ -100,8 +98,33 @@ a{
     outline: none;
   }
   input{
-    padding: 8px;
+    height: 100%;
     border-radius: 5px;
     font-size: 16px;
   }
-
+  .inputField{
+    height: 40px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  input{
+    width: 100%;
+    padding-left: 15px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.608);
+  }
+  label{
+    position: absolute;
+    margin-left: 10px;
+    color: rgb(136, 136, 136);
+    transition: top ease-in-out 0.3s,
+                font-size ease-in-out 0.3s;
+  }
+  input:focus + label, input:valid + label{
+    top: -10px;
+    font-size: 14px;
+    color: rgb(46, 46, 46);
+    font-weight: 600;
+  }
