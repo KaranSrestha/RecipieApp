@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './Components/Pages/Home'
 import Login from './Components/Pages/Login/Login'
-import Sidebar from './Components/Sidebar/Sidebar'
 
 function App() {
   return (
