@@ -31,7 +31,7 @@ const Post = () => {
             ></i>
             2 likes
           </p>
-          <p className={veiw?"text-[14px]":"text-[14px] max-h-[50px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer"} onClick={()=> setView(!veiw)}>
+          <p className={veiw ? "text-[14px]" : "text-[14px] max-h-[50px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer"} onClick={() => setView(!veiw)}>
             Karan Srestha: Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis natus mollitia explicabo qui expedita? Illum, blanditiis ab! Voluptas aspernatur soluta sed, maxime maiores ut perferendis quas officia reprehenderit ipsa laudantium doloribus!
           </p>
         </div>
