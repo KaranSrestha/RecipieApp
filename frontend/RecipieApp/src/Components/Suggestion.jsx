@@ -1,5 +1,5 @@
 import React from 'react';
-import img from '../Pages/Login/background.jpg'
+import img from '/background.jpg'
 
 const Suggestion = () => {
     return (

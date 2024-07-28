@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar/Sidebar'
-import image from './Login/background.jpg'
+import image from '/background.jpg'
 
 const images = [
   image,

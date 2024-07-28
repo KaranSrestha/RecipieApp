@@ -3,33 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { TypeAnimation } from 'react-type-animation';
 
-function Login() {
+function Signup() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [password, setPassword] = useState('');
 
     return (
         <StyledContainer>
             <div className="textAnimation">
-                <span style={{ fontSize: '2rem' }}>Share Your,</span>
-                <TypeAnimation
-                    sequence={['Recipies.', 1000, 'Secrets.', 1000]}
-                    wrapper="span"
-                    speed={50}
-                    style={{ display: 'inline-block' }}
-                    repeat={Infinity}
-                />
+                <span style={{ fontSize: '2rem' }}>Create Your,</span>
+                <span>Account Today.</span>
             </div>
             <div id="card">
                 <div id="card-title">
-                    <h2>LOGIN</h2>
+                    <h2>Signup</h2>
                 </div>
                 <form method="post" className="form">
                     <div className='inputField'>
                         <input
                             id="user-email"
                             className="form-content"
-                            type="text"
+                            type="email"
                             name="email"
                             autoFocus="off"
                             required
@@ -37,38 +33,65 @@ function Login() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <label htmlFor="user-email" className={email ? 'shrink' : ''}>
-                            &nbsp;Email or Username
+                            &nbsp;Email
                         </label>
                     </div>
                     <div className='inputField'>
                         <input
-                            id="user-password"
+                            id="user-name"
+                            className="form-content"
+                            type="text"
+                            name="user-name"
+                            autoFocus="off"
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <label htmlFor="user-name" className={username ? 'shrink' : ''}>
+                            &nbsp;Username
+                        </label>
+                    </div>
+                    <div className='inputField'>
+                        <input
+                            id="password"
                             className="form-content"
                             type="password"
                             name="password"
+                            autoFocus="off"
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <label htmlFor="user-password" className={password ? 'shrink' : ''}>
+                        <label htmlFor="password" className={password ? 'shrink' : ''}>
                             &nbsp;Password
                         </label>
-                        <span id="f-pass">
-                            Forgot password?
-                        </span>
+                    </div>
+                    <div className='inputField'>
+                        <input
+                            id="cnfm-password"
+                            className="form-content"
+                            type="password"
+                            name="cnfm-password"
+                            required
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <label htmlFor="cnfm-password" className={confirmPassword ? 'shrink' : ''}>
+                            &nbsp;Confirm Password
+                        </label>
                     </div>
                     <input
                         // onClick={() => navigate("/home")}
                         id="submit-btn"
                         type="submit"
                         name="submit"
-                        value="LOGIN"
+                        value="SIGNUP"
                     />
                 </form>
-                <p className='signUp-link'>
-                    Don't have an account?&nbsp;
-                    <a onClick={() => navigate("/signup")} id="signup">
-                        Register
+                <p className='logIN-link'>
+                    Already have an account?&nbsp;
+                    <a onClick={() => navigate("/")} id="signup">
+                        Login
                     </a>
                 </p>
             </div>
@@ -91,7 +114,7 @@ const StyledContainer = styled.div`
     
     @media (min-width: 768px) {
         justify-content: space-evenly;
-        flex-direction: row;
+        flex-direction: row-reverse;
     }
 
     .textAnimation {
@@ -99,7 +122,7 @@ const StyledContainer = styled.div`
         flex-direction: column;
         color: #ffffff;
         display: flex;
-        padding-left: 30px;
+        padding-right: 30px;
         letter-spacing: 2px;
         font-weight: 800;
         font-size: 2.5em;
@@ -110,12 +133,12 @@ const StyledContainer = styled.div`
         @media (min-width: 1099px) {
             max-width: 500px;
             display: flex;
-            border-radius: 37% 63% 79% 21% / 55% 65% 35% 45% ;
-            background: linear-gradient(to left, #f77a7a, #88ce1e);
+            border-radius: 46% 54% 23% 77% / 74% 65% 35% 26%  ;
+            background: linear-gradient(to right, #f77a7a, #88ce1e);
             justify-content: center;
-            text-align: left;
+            text-align: center;
             height: 500px;
-            font-size: 5rem;
+            font-size: 3.6rem;
         }
     }
 
@@ -194,19 +217,6 @@ const StyledContainer = styled.div`
                         background-color: white;
                     }
                 }
-
-                #f-pass {
-                    bottom: 0;
-                    position: absolute;
-                    right: 0;
-                    transform: translateY(100%);
-                    font-size: 12px;
-                    color: #2f48aa;
-                    &:hover {
-                        text-decoration: underline;
-                        cursor: pointer;
-                    }
-                }
             }
 
             #submit-btn {
@@ -226,7 +236,7 @@ const StyledContainer = styled.div`
             }
         }
 
-        .signUp-link {
+        .logIN-link {
             text-align: center;
             font-size: 12px;
             a#signup {
@@ -239,4 +249,4 @@ const StyledContainer = styled.div`
     }
 `;
 
-export default Login;
+export default Signup;
