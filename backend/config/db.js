@@ -1,7 +1,7 @@
 const pg = require("pg");
 
 const db = new pg.Client({
-    user: process.env.USERNAME, 
+    user: "postgres", 
     host: process.env.HOST, 
     database: process.env.DATABASE, 
     password: process.env.PASSWORD, 

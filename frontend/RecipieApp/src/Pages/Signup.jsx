@@ -1,14 +1,55 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { TypeAnimation } from 'react-type-animation';
+import 'toastr/build/toastr.min.css';
+import toastr from 'toastr';
 
 function Signup() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [password, setPassword] = useState('');
+
+    async function signUp(e) {
+        e.preventDefault();
+
+        if (password !== confirmPassword) {
+            toastr.error("Passwords do not match.");
+            return;
+        }
+
+        let items = { name, email, username, password };
+
+        try {
+            let response = await fetch("http://localhost:3000/api/signup", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(items)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            let result = await response.json();
+            console.log("Result:", result);
+            localStorage.setItem("token", result.token);
+            const token2 = localStorage.getItem("token");
+            console.log(token2);
+
+            toastr.success("Sign-up successful! Redirecting to login...");
+            setTimeout(() => {
+                navigate("/");
+            }, 2000);
+        } catch (error) {
+            console.error("Error during sign-up:", error);
+            toastr.error("Sign-up failed. Please try again.");
+        }
+    }
 
     return (
         <StyledContainer>
@@ -20,14 +61,27 @@ function Signup() {
                 <div id="card-title">
                     <h2>Signup</h2>
                 </div>
-                <form method="post" className="form">
+                <form method="post" className="form" onSubmit={signUp}>
+                    <div className='inputField'>
+                        <input
+                            id="name"
+                            className="form-content"
+                            type="text"
+                            name="name"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <label htmlFor="name" className={name ? 'shrink' : ''}>
+                            &nbsp;Name
+                        </label>
+                    </div>
                     <div className='inputField'>
                         <input
                             id="user-email"
                             className="form-content"
                             type="email"
                             name="email"
-                            autoFocus="off"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -42,7 +96,6 @@ function Signup() {
                             className="form-content"
                             type="text"
                             name="user-name"
-                            autoFocus="off"
                             required
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -57,7 +110,6 @@ function Signup() {
                             className="form-content"
                             type="password"
                             name="password"
-                            autoFocus="off"
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -81,7 +133,6 @@ function Signup() {
                         </label>
                     </div>
                     <input
-                        // onClick={() => navigate("/home")}
                         id="submit-btn"
                         type="submit"
                         name="submit"
@@ -98,6 +149,7 @@ function Signup() {
         </StyledContainer>
     );
 }
+
 
 const StyledContainer = styled.div`
     background: url("/background.jpg") no-repeat;

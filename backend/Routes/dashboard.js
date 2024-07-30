@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get("/dashboard", authenticateToken, async (req, res)=>{
     const userId = req.user.user_id;
-
     const q1 =`
         SELECT * FROM users
         WHERE user_id = $1;
