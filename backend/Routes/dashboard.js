@@ -1,5 +1,6 @@
 const express = require("express");
 const authenticateToken = require("../config/authenticateJWT");
+const db = require("../config/db")
 const router = express.Router();
 
 router.get("/dashboard", authenticateToken, async (req, res)=>{
@@ -23,3 +24,5 @@ router.get("/dashboard", authenticateToken, async (req, res)=>{
         res.status(500).json({error: "Database Error"});
     }
 })
+
+module.exports = router;

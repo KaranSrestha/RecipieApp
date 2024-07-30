@@ -3,10 +3,9 @@ const router = express.Router();
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authenticateToken = require("../config/authenticateJWT");
+const secretKey = "secret_key"; 
 
-const secretKey = process.env.JWT_SECRET || 'my_jwt_secret'; 
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     
     const query = `
