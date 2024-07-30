@@ -1,10 +1,10 @@
 const pg = require("pg");
 
 const db = new pg.Client({
-    user: "postgres", 
-    host: "localhost", 
-    database: "RecipieApp", 
-    password: "Karan@2002", 
+    user: process.env.USERNAME, 
+    host: process.env.HOST, 
+    database: process.env.DATABASE, 
+    password: process.env.PASSWORD, 
     port: 5432
 });
 
