@@ -58,3 +58,6 @@ i {
 .more-link {
     margin-top: auto;
 }
+::-webkit-scrollbar{
+    width: 2px;
+}

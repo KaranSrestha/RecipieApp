@@ -16,12 +16,12 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.post("/create-post", authenticateToken, upload.single('image'), async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, ingredients = [], steps = [] } = req.body;
     const userId = req.user.user_id;
     const imageFile = req.file;
 
     if (!title || !description || !imageFile) {
-        return res.status(400).json({ message: "All fields are mandatory" });
+        return res.status(400).json({ message: "Title, description, and image are mandatory" });
     }
 
     try {
@@ -35,12 +35,11 @@ router.post("/create-post", authenticateToken, upload.single('image'), async (re
             .on('finish', async () => {
                 const imageUrl = uploadStream.url;
 
-
                 const query = `
-                    INSERT INTO posts (user_id, title, description, post_img)
-                    VALUES ($1, $2, $3, $4) RETURNING *;
+                    INSERT INTO posts (user_id, title, description, post_img, ingredients, steps)
+                    VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
                 `;
-                const values = [userId, title, description, imageUrl];
+                const values = [userId, title, description, imageUrl, ingredients, steps];
                 
                 try {
                     const result = await db.query(query, values);
