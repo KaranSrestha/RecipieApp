@@ -2,11 +2,45 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { TypeAnimation } from 'react-type-animation';
+import 'toastr/build/toastr.min.css';
+import toastr from 'toastr';
 
 function Login() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    async function handleLogin(e) {
+        e.preventDefault();
+
+        const credentials = { username, password };
+
+        try {
+            const response = await fetch("http://localhost:3000/api/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(credentials)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem("token", result.token);
+                console.log(result.token)
+                toastr.success("Login successful! Redirecting to Home page...");
+                setTimeout(() => {
+                    navigate("/home");
+                }, 2000);
+            } else {
+                toastr.error(result.message);
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            toastr.error("Login failed. Please try again.");
+        }
+    }
 
     return (
         <StyledContainer>
@@ -24,20 +58,20 @@ function Login() {
                 <div id="card-title">
                     <h2>LOGIN</h2>
                 </div>
-                <form method="post" className="form">
+                <form method="post" className="form" onSubmit={handleLogin}>
                     <div className='inputField'>
                         <input
-                            id="user-email"
+                            id="user-username"
                             className="form-content"
                             type="text"
-                            name="email"
+                            name="username"
                             autoFocus="off"
                             required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
-                        <label htmlFor="user-email" className={email ? 'shrink' : ''}>
-                            &nbsp;Email or Username
+                        <label htmlFor="user-username" className={username ? 'shrink' : ''}>
+                            &nbsp;Username
                         </label>
                     </div>
                     <div className='inputField'>
@@ -58,7 +92,6 @@ function Login() {
                         </span>
                     </div>
                     <input
-                        // onClick={() => navigate("/home")}
                         id="submit-btn"
                         type="submit"
                         name="submit"

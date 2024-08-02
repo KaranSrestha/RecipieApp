@@ -11,44 +11,75 @@ function Signup() {
     const [name, setName] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [password, setPassword] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+
+    const validEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
+    const validatePassword = () => {
+        return password.length >= 6 && password.length <= 15;
+    };
 
     async function signUp(e) {
         e.preventDefault();
+        let isValid = true;
 
-        if (password !== confirmPassword) {
-            toastr.error("Passwords do not match.");
-            return;
+        if (!validEmail(email)) {
+            setEmailError('Invalid email format');
+            isValid = false;
+        } else {
+            setEmailError('');
         }
 
-        let items = { name, email, username, password };
+        if (!validatePassword()) {
+            setPasswordError('Password must be between 6 and 15 characters');
+            isValid = false;
+        } else {
+            setPasswordError('');
+        }
+        if (password == confirmPassword) {
+            if (isValid) {
+            let items = { name, email, username, password };
 
-        try {
-            let response = await fetch("http://localhost:3000/api/signup", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(items)
-            });
+            try {
+                let response = await fetch("http://localhost:3000/api/signup", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(items)
+                });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                let result = await response.json();
+                if (result.error) {
+                    setUsernameError(result.error);
+                    return;
+                }
+
+                toastr.success("Sign-up successful! Redirecting to login...");
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
+            } catch (error) {
+                console.error("Error during sign-up:", error);
+                console.log(error);
+                toastr.error("Sign-up failed. Please try again.");
             }
-
-            let result = await response.json();
-            console.log("Result:", result);
-            localStorage.setItem("token", result.token);
-            const token2 = localStorage.getItem("token");
-            console.log(token2);
-
-            toastr.success("Sign-up successful! Redirecting to login...");
-            setTimeout(() => {
-                navigate("/");
-            }, 2000);
-        } catch (error) {
-            console.error("Error during sign-up:", error);
-            toastr.error("Sign-up failed. Please try again.");
         }
+        }
+        else{
+            toastr.error("password does not match")
+        }
+
+
     }
 
     return (
@@ -89,6 +120,7 @@ function Signup() {
                         <label htmlFor="user-email" className={email ? 'shrink' : ''}>
                             &nbsp;Email
                         </label>
+                        {emailError && <p className="error">{emailError}</p>}
                     </div>
                     <div className='inputField'>
                         <input
@@ -103,6 +135,7 @@ function Signup() {
                         <label htmlFor="user-name" className={username ? 'shrink' : ''}>
                             &nbsp;Username
                         </label>
+                        {usernameError && <p className="error">{usernameError}</p>}
                     </div>
                     <div className='inputField'>
                         <input
@@ -117,6 +150,7 @@ function Signup() {
                         <label htmlFor="password" className={password ? 'shrink' : ''}>
                             &nbsp;Password
                         </label>
+                        {passwordError && <p className="error">{passwordError}</p>}
                     </div>
                     <div className='inputField'>
                         <input
@@ -268,6 +302,13 @@ const StyledContainer = styled.div`
                         color: black;
                         background-color: white;
                     }
+                }
+                .error {
+                    color: red;
+                    font-size: 12px;
+                    position: absolute;
+                    bottom: -18px;
+                    left: 0;
                 }
             }
 
