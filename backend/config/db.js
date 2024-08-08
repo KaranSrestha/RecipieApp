@@ -14,7 +14,9 @@ const query1 = `
         name TEXT NOT NULL,
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        email TEXT
+        email TEXT UNIQUE,
+        otp TEXT,
+        otp_expires_at TIMESTAMP
     );
 `;
 

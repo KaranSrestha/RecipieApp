@@ -15,18 +15,18 @@ const hashPassword = async (plainPassword) => {
 
 router.post("/signup", async (req, res) => {
     const { name, username, password, email } = req.body;
-    const hashedPassword = await hashPassword(password); // Hash the password
+    const hashedPassword = await hashPassword(password);
 
     const query2 =`
         Select * from users
-        where username = $1
+        where username = $1 OR email = $2
     `
-    const value2 = [username];
+    const value2 = [username, email];
 
     const query = `
         INSERT INTO users(name, username, password, email)
         VALUES($1, $2, $3, $4)
-        RETURNING user_id, username; -- Retrieve user_id and username after insertion
+        RETURNING user_id, username;
     `;
     const values = [name, username, hashedPassword, email];
 
