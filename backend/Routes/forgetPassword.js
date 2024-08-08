@@ -59,3 +59,36 @@ router.post("/forgot-password/get-email", async (req, res) => {
         res.status(500).json({error: "Server Error"});
     }
 })
+
+router.post("/forget-password/verify-otp", async (req, res) => {
+    const { email, otp } = req.body;
+    
+    const query = `
+        SELECT otp, otp_expires_at FROM users
+        WHERE email = $1
+    `;
+    const values = [email];
+
+    try {
+        const userResult = await db.query(query, values);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const user = userResult.rows[0];
+
+        if (user.otp !== otp) {
+            return res.status(400).json({ error: "Invalid OTP" });
+        }
+
+        const currentTime = new Date();
+        if (currentTime > user.otp_expires_at) {
+            return res.status(400).json({ error: "OTP has expired" });
+        }
+
+        return res.status(200).json({ message: "OTP verified successfully" });
+
+    } catch (error) {
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
